@@ -85,15 +85,8 @@ public class XdashToken{
                     id = Judgment(element.get(j), reserved_word, type1);
                     if(id != -1){
                         type_number = 1;
-                        if(id != -2){
-                            System.out.println("(" + type_number + "," + (id+1) + ")");
-                            break;
-                        }
-                        else{
-                            type1.add(element.get(j));
-                            System.out.println("(" + type_number + "," + type1.size() + ")");
-                            break;
-                        }
+                        Output(type_number, id, j, 1, 0, element, type1);
+                        break;
 
                     }
 
@@ -101,79 +94,40 @@ public class XdashToken{
                     id = Judgment(element.get(j), type, type4);
                     if(id != -1){
                         type_number = 4;
-                        if(id != -2){
-                            System.out.println("(" + type_number + "," + (id+1) + ")");
-                            break;
-                        }
-                        else{
-                            type4.add(element.get(j));
-                            System.out.println("(" + type_number + "," + type4.size() + ")");
-                            break;
-                        }
-
+                        Output(type_number, id, j, 1, 0, element, type4);
+                        break;
                     }
 
                     // 種類６
                     id = Judgment(element.get(j), function, type6);
                     if(id != -1){
                         type_number = 6;
-                        if(id != -2){
-                            System.out.println("(" + type_number + "," + (id+1) + ")");
-                            break;
-                        }
-                        else{
-                            type6.add(element.get(j));
-                            System.out.println("(" + type_number + "," + type6.size() + ")");
-                            break;
-                        }
-
+                        Output(type_number, id, j, 1, 0, element, type6);
+                        break;
                     }
 
                     // 種類８（普通の演算子）
                     id = Judgment(element.get(j), operator, type8_nomal);
                     if(id != -1){
                         type_number = 8;
-                        if(id != -2){
-                            System.out.println("(" + type_number + "," + (id+1) + ")");
-                            break;
-                        }
-                        else{
-                            type8_nomal.add(element.get(j));
-                            System.out.println("(" + type_number + "," + type8_nomal.size() + ")");
-                            break;
-                        }
-
+                        Output(type_number, id, j, 1, 0, element, type8_nomal);
+                        break;
                     }
 
                     // 種類８（比較演算子）
                     id = Judgment(element.get(j), operater_comp, type8_comp);
                     if(id != -1){
                         type_number = 8;
-                        if(id != -2){
-                            System.out.println("(" + type_number + "," + (id+1+10) + ")");
-                            break;
-                        }
-                        else{
-                            type8_comp.add(element.get(j));
-                            System.out.println("(" + type_number + "," + (type8_comp.size()+10) + ")");
-                            break;
-                        }
-
+                        Output(type_number, id, j, 11, 10, element, type8_comp);
+                        break;
                     }
                     
                     // 種類２
                     if(pre_type_number == 1){
                         type_number = 2;
                         id = Search(element.get(j), type2);
-                        if(id != -2){
-                            System.out.println("(" + type_number + "," + (id+1) + ")");
-                            break;
-                        }
-                        else{
-                            type2.add(element.get(j));
-                            System.out.println("(" + type_number + "," + (type2.size()) + ")");
-                            break;
-                        }
+                        Output(type_number, id, j, 1, 0, element, type4);
+                        break;
                     }
 
                     // 種類７
@@ -207,6 +161,28 @@ public class XdashToken{
         
 
     }
+
+    /*
+    関数名：Output
+    引数：int type_number, int id, int j, int pad, List<String> element, List<String> type
+    戻り値：なし
+    役割：コンソールに決まった形式に従って、出力させる。
+    　　　typeに語句が追加されていなければ、登録する。
+    */
+
+    static void Output(int type_number, int id, int suffix, int pading, int pading2, List<String> element, List<String> type){
+
+        if(id != -2){
+            System.out.println("(" + type_number + "," + (id+pading) + ")");
+        }
+        else{
+            type.add(element.get(suffix));
+            System.out.println("(" + type_number + "," + (type.size()+pading2) + ")");
+        }
+
+    }
+
+
 
     /*
     関数名：Serch
