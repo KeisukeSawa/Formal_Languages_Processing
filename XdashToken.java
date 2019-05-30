@@ -1,3 +1,4 @@
+// 演習１プログラム
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -256,28 +257,27 @@ public class XdashToken{
         // judmentに―1を代入する（格納されていないと仮定する）
         int judgement = -1;
 
+        // judge配列の長さだけ繰り返す
         for(int i=0; i<judge.length; i++){
 
+            // judge[i]とtargetが等しければ実行
             if(target.equals(judge[i])){
-
+                // typeのサイズだけ繰り返す
                 for(int k=0; k < type.size(); k++){
+                    // もし、typeにtargetが格納されていれば実行
                     if(target.equals(type.get(k))){
+                        // judgementを添字にする
                         judgement = k;
+                        // judgementを返す
                         return judgement;
                     }
                 }
-
                 judgement = -2;
-
                 return judgement;
-
             }
         }
-
         return judgement;
-
     }
-
 
     /* 
     関数名：Row_split
@@ -288,51 +288,48 @@ public class XdashToken{
     */
     static List<String> Row_split(String row){
 
+        // rowの中身を要素ごとに格納する配列
         List<String> element = new ArrayList<String>();
 
         // rowの空白、制御文字の削除
         row = row.trim();
 
+        // rowから要素を取り出す際のrowの左側、右側の添字
         int left = 0, right = 0;
 
+        // rowの長さだけ繰り返す
         for(int i=0; i<=row.length(); i++){
-
+            // rowの最後の文字に来たら実行
             if(right == row.length() ){
-
+                // cutにrowのleft番目の文字からright番目の文字を切り出して代入
                 String cut = row.substring(left, right);
-                
+                // cutの長さが0でない（cutが空文字でなければ）実行
                 if(cut.length() != 0){
+                    // elementにcutを代入
                     element.add(cut);
                 }
-                
             }
+            // rowのi番目の文字が ' '　','　';' ')'　'}'　であれば実行する（これらの文字は無視）
             else if( (row.charAt(i) == ' ') || (row.charAt(i) == ',')  || (row.charAt(i) == ';') || (row.charAt(i) == ')')  || (row.charAt(i) == '}') ){
-
                 String cut = row.substring(left, right);
-
                 if(cut.length() != 0){
                     element.add(cut);
                 }
+                // left,rightをi+1に設定
                 left = i+1;
                 right = i+1;
-                
             }
+            // rowのi番目の文字が '(' '{'　であれば実行
             else if ( (row.charAt(i) == '(') ||  (row.charAt(i) == '{') ){
-
                 left = i+1;
                 right = i+1;
-
             }
             else {
-                
+                // rightを1増やす
                 right++;
-
             }
-
         }
-        
+        // elementを返す
         return element;
-
     }
-
 }
