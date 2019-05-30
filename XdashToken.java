@@ -17,8 +17,6 @@ public class XdashToken{
         // 演算子配列
         String[] operator = {"+","-",":="};
         String[] operater_comp = {"<","<=",">=",">"};
-        // コメント配列
-        String[] comment = {"//","/*","*/"};
 
         // 各種類に分類された要素を格納するリスト
         // 種類１（予約語）
