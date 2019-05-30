@@ -1,1 +1,3 @@
-"# Formal_Languages_Processing" 
+# 言語処理の課題
+
+言語処理の課題プログラム用のリポジトリです。
