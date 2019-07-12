@@ -1,0 +1,14 @@
+program Sample {
+   int a, b;
+   char c;
+   String str;
+   /* This is a sample program for the X‘ language */ 
+   a := 1; b := 0;
+   while (a <= 10) {
+      b := b + a;  // summation 1
+      a := a + 2;  // summation 2
+      if (b > 20) { a := a - 1 }
+   }
+   str := "answer"; c := '=';
+   print ("%s%c%d\n", str, c, b);
+}
