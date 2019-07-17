@@ -162,22 +162,24 @@ class Calculator{
             // 出力対象のトークンをoutput_expressionに代入
             String output_expression = token;
 
-            // tokenが'+'および'-'なら実行
-            if(token.equals("+") || token.equals("-")){
-
-                // 次のトークンをtokenに代入
-                Loolahead();
-                // Termを実行
-                Term();
-
-                reversePolandResult.add(output_expression);
-                System.out.println(output_expression);
-
+            switch (token) {
+                case "+":
+                    // 次のトークンをtokenに代入
+                    Loolahead();
+                    // Termを実行
+                    Term();
+                    reversePolandResult.add(output_expression);
+                    break;
+                case "-":
+                    // 次のトークンをtokenに代入
+                    Loolahead();
+                    // Termを実行
+                    Term();
+                    reversePolandResult.add(output_expression);
+                    break;
+                default:
+                    return;
             }
-            else{
-                return;
-            }
-
         }
 
     }
@@ -199,26 +201,25 @@ class Calculator{
             // 出力対象のトークンをoutput_termに代入
             String output_term = token;
 
-
-            // tokenが'*'および'/'なら実行
-            if(token.equals("*") || token.equals("/")){
-
-                // 次のトークンをtokenに代入
-                Loolahead();
-                // Termを実行
-                Factor();
-
-                reversePolandResult.add(output_term);
-                System.out.println(output_term);
-
+            switch (token) {
+                case "*":
+                    // 次のトークンをtokenに代入
+                    Loolahead();
+                    // Termを実行
+                    Factor();
+                    reversePolandResult.add(output_term);
+                    break;
+                case "/":
+                    // 次のトークンをtokenに代入
+                    Loolahead();
+                    // Termを実行
+                    Factor();
+                    reversePolandResult.add(output_term);
+                    break;
+                default:
+                    return;
             }
-            else{
-                return;
-            }
-
         }
-        
-        
     }
 
     /*
@@ -232,32 +233,23 @@ class Calculator{
         // 出力対象のトークンをoutput_termに代入
         String output_factor = token;
 
-        // tokenが'*'および'/'なら実行
-        if(token.equals("(")){
-
-            // 次のトークンをtokenに代入
-            Loolahead();
-
-            // Expressionを実行
-            Expression();
-
-            if(!token.equals(")")){
-                System.out.println(" ')' missing");
-            }
-
-            // 次のトークンをtokenに代入
-            Loolahead();
-
-        }
-        else{
-
-            // CONSTであると判断
-            reversePolandResult.add(output_factor);
-            System.out.println(output_factor);
-
-            // 次のトークンをtokenに代入
-            Loolahead();
-
+        switch (token) {
+            case "(":
+                // 次のトークンをtokenに代入
+                Loolahead();
+                // Expressionを実行
+                Expression();
+                if(!token.equals(")")){
+                    System.out.println(" ')' missing");
+                }
+                // 次のトークンをtokenに代入
+                Loolahead();
+                break;
+            default:
+                // CONSTであると判断
+                reversePolandResult.add(output_factor);
+                // 次のトークンをtokenに代入
+                Loolahead();           
         }
     }
 
@@ -266,7 +258,6 @@ class Calculator{
     引数：String row
     戻り値：String[]
     役割：rowを要素ごとに分割し、要素ごとにString型の配列に格納し、返り値として返す。
-         その際、区切り文字のコンマ, セミコロン; ブロックを表す curly blacket　( {　と } )および 括弧 ( ) は読み飛ばす。　
     */
     static List<String> Row_split(String row){
 
